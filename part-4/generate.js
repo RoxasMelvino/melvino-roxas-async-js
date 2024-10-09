@@ -1,12 +1,34 @@
-// recall that JS is a single-threaded programming language
-// thus, long synchronous tasks blocks the main thread and makes the page unresponsesive
+// Listen for messages from the main thread.
+// if the message command is "generate", call 'generatePrimes()'
+addEventListener("message", (message) => {
+    if (message.data.command === "generate") {
+        generatePrimes(message.data.quota);
+    }
+});
 
+// Generate primes (very inefficiently)
+function generatePrimes(quota) {
+    function isPrime(n) {
+      for (let c = 2; c <= Math.sqrt(n); ++c) {
+        if (n % c === 0) {
+          return false;
+        }
+      }
+      return true;
+    }
+  
+    const primes = [];
+    const maximum = 1000000;
+  
+    while (primes.length < quota) {
+      const candidate = Math.floor(Math.random() * (maximum + 1));
+      if (isPrime(candidate)) {
+        primes.push(candidate);
+      }
+    }
 
-// this is where workers come in
-// they give you the ability to work in a DIFFERENT thread
-// this means that your main code and worker code never get direct access to each other's variables
-// this also means your worker code cannot access the DOM
-// they are in completely different worlds
-
-// There are three different sorts of workers:
-// dedicated, shared, service
+    // When we have finished, send a message to the main thread, 
+    // including the number of primes we generated.
+    // console.log(primes);
+    postMessage(primes.length)
+}
