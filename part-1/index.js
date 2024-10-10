@@ -63,6 +63,7 @@ document.getElementById("reload").addEventListener("click", () => {
 // you cannot click, type, or do anything else. 
 // this is the case becaues JS is single-threaded, meaning it can only do one thing at a time.
 
+// this is where asynchronous functions come in
 // what is an example of an asynchronous function?
 // event handlers
 // XMLHttpRequest

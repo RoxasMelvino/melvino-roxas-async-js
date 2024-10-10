@@ -1,12 +1,14 @@
 //each function represents a section of the website from MDN
 
 //if the promise failes or succeeds, it will call our handler ,
-// pass in our repsonse object; which contains the server's response.
+// pass in our response object; which contains the server's response.
 function usingFetch() {
     const fetchPromise = fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json")
 
-    console.log(fetchPromise); // this tells us that we have a promise
     // it will say pending; telling us that the operation is still going on.
+    console.log(fetchPromise); 
+    // this tells us that we have a promise
+
     fetchPromise.then((response) => { 
         jsonPromise = response.json(); // use this method to get the responses data;
     
